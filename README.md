@@ -5,9 +5,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Installation
 
 
-1. Instalar nodejs --> https://nodejs.org/es/              // 1. Install nodejs
-2. Instalar Angular --> npm install -g @angular/cli@latest // 2. Install Angular
-3. git clone rutaDelGit.com                                // 3. git clone routeGit.com  
+1. Instalar nodejs --> https://nodejs.org/es/              // 1. Install nodejs --> https://nodejs.org/es/ 
+2. Instalar Angular --> npm install -g @angular/cli@latest // 2. Install Angular --> npm install -g @angular/cli@latest
+3. git clone https://github.com/jcantobloonde/ng-crm.git   // 3. git clone https://github.com/jcantobloonde/ng-crm.git 
 4. npm install                                             // 4. npm install
 5. npm start (para inicializar el servidor)                // 5. npm start (run server on localhost:4200)
 
