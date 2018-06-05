@@ -1,0 +1,52 @@
+<div class="container col-lg-10">
+  <p><span class="h1">Contacto. </span><span class="h2">Hilo y Acciones.</span> </p>
+
+  <!-- ALERTAS CONTACTO -->
+  <div class="alert alert-success text-center" *ngIf="showCreateContactAlert == 'store'">
+    ¡¡Contacto creado correctamente!!
+  </div>
+
+  <div class="alert alert-success text-center" *ngIf="showCreateContactAlert == 'update'">
+    ¡¡Contacto editado correctamente!!
+  </div>
+
+  <div class="alert alert-success text-center" *ngIf="showCreateContactAlert == 'delete'">
+    ¡¡Contacto eliminado correctamente!!
+  </div>
+
+  <!-- ALERTAS HILOS -->
+  <div class="alert alert-success text-center" *ngIf="showCreateContactAlert == 'storeThread'">
+    ¡¡Hilo creado correctamente!!
+  </div>
+  <div class="alert alert-success text-center" *ngIf="showCreateContactAlert == 'updateThread'">
+    ¡¡Hilo editado correctamente!!
+  </div>
+  <div class="alert alert-success text-center" *ngIf="showCreateContactAlert == 'deleteThread'">
+    ¡¡Hilo eliminado correctamente!!
+  </div>
+  <div class="alert alert-danger text-center" *ngIf="showCreateContactAlert == 'error'">
+    ¡Ha ocurrido un error, inténtelo de nuevo!
+  </div>
+  <div class="form-group w-25 d-inline-block">
+    <label for="sel1">Contacto</label>
+    <select class="form-control" id="sel1" [(ngModel)]="contact_id" (change)="threadsList(); contactForm()">
+      <option *ngFor="let contact of contact_options['contacts']" [value]="contact.id">{{contact.name}}</option>
+    </select>
+  </div>
+
+  <div class="form-group w-25 d-inline-block m-3">
+    <label for="sel1">Hilo</label>
+    <select class="form-control" id="sel2" [(ngModel)]="thread_id" (change)="actionsList(); threadForm()">
+      <option *ngFor="let thread of thread_options['threads']" [value]="thread.id">{{thread.name}}</option>
+    </select>
+  </div>
+  <div class="d-inline-block position-relative w-100">
+    <app-contacts (success)="changeAlert($event)" class="d-inline-block w-50 position-absolute"></app-contacts>
+    <app-threads [inputContactId]="contact_id" (success)="changeAlert($event)" class="d-inline-block w-49 float-right"></app-threads>
+    <div style="clear: both">
+      <app-action-list class="d-inline-block w-100"></app-action-list>
+    </div>
+  </div>
+
+</div>
+

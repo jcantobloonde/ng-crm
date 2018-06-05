@@ -1,0 +1,98 @@
+<div class="border3 border-danger rounded d-inline-block bg-light">
+
+  <!-- TÍTULO -->
+  <h4 class="bg-danger text-center text-white mb-0">
+    Hilo
+    <i class="fas fa-plus-circle float-right mr-2" (click)="resetFormThread('create')"></i>
+    <i class="fas fa-pencil-alt float-right mr-1" (click)="changeMode('edit'); threadSelected(thread_id)"></i>
+    <i class="far fa-eye float-right mr-1" (click)="changeMode('view'); threadSelected(thread_id)"></i>
+  </h4>
+
+  <form>
+
+    <!-- NOMBRE -->
+    <div class="form-group d-inline-block ml-4 mt-2">
+      <label for="name">Nombre de Hilo</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" [(ngModel)]="thread.name" [disabled]="mode == 'view'">
+    </div>
+
+    <!-- FECHA -->
+    <div class="form-group d-inline-block ml-4 mt-2">
+      <label for="date">Primera Fecha</label>
+      <input type="datetime" class="form-control" id="date" name="date" placeholder="2000-01-01 00:00:00" [(ngModel)]="thread.created_at"  [disabled]="mode == 'view'">
+    </div>
+
+
+    <!-- ESTADO -->
+    <div class="form-group d-inline-block ml-4">
+      <label for="status">Estado</label>
+      <select class="form-control" id="status" [disabled]="mode == 'view'" name="status" [(ngModel)]="thread.status">
+        <option [value]="undefined">--Seleccione un estado--</option>
+        <option value="1">Abierto</option>
+        <option value="0">Cerrado</option>
+      </select>
+    </div>
+
+    <!-- INTERES-->
+    <div class="form-group d-inline-block ml-4">
+      <label for="interest">Interés</label>
+      <input type="text" class="form-control" id="interest" placeholder="Interes" name="interest" [(ngModel)]="thread.interest" [disabled]="mode == 'view'">
+    </div>
+
+    <!-- FUENTE-->
+    <div class="form-group d-inline-block ml-4">
+      <label for="source">Fuente</label>
+      <input type="text" class="form-control" id="source" placeholder="Fuente" name="source" [disabled]="mode == 'view'" [(ngModel)]="thread.source">
+    </div>
+
+    <!-- DESCRIPCION -->
+    <div class="form-group w-50 d-inline-block ml-4 mt-2">
+      <label for="description">Descripción</label>
+      <textarea class="form-control" id="description" name="description" placeholder="Descripción" [disabled]="mode == 'view'" [(ngModel)]="thread.description"></textarea>
+    </div>
+
+    <!--BOTONES-->
+    <div class="float-right mt-5">
+      <div class="form-group d-inline-block mt-3 mr-5" *ngIf="mode == 'create'">
+        <button type="submit" class="btn btn-primary" id="buttonAddThread" (click)="storeThread()">Añadir <i class="fas fa-plus"></i></button>
+      </div>
+      <div class="form-group d-inline-block ml-4 mt-3 mr-5" *ngIf="mode == 'edit'">
+        <button type="button" class="btn btn-warning text-white" id="buttonEditThread" (click)="updateThread()">Editar <i class="fas fa-pencil-alt"></i></button>
+      </div>
+      <div class="form-group d-inline-block ml-4 mt-3 mr-5" *ngIf="mode == 'view'">
+        <button type="button" class="btn btn-danger" id="buttonDeleteThread" (click)="showModal()">Borrar <i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modal delete -->
+  <div class="modal fade" id="ModalDeleteThread" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content border3 border-danger rounded bg-light">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title text-white" id="ModalLabel">Acción</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>¿Estás seguro que deseas eliminar este hilo?</h4>
+        </div>
+        <div class="modal-footer">
+          <!--BOTONES-->
+          <div class="form-group d-inline-block mt-2">
+            <button type="submit" class="btn btn-danger" id="buttonDeleteAction" (click)="modalClose()">Cancelar</button>
+          </div>
+          <div class="form-group d-inline-block ml-4 mt-2 mr-3">
+            <button type="submit" class="btn btn-primary" id="buttonAddAction" (click)="modalConfirmDelete()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+

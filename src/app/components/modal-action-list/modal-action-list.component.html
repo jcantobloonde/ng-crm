@@ -1,0 +1,103 @@
+<!-- Modal -->
+<div class="modal fade" id="ModalAction" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border3 border-success rounded bg-light">
+      <div class="modal-header bg-success">
+        <h5 class="modal-title text-white" id="ModalLabel">Acción</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="action">
+        <form>
+
+          <!-- NOMBRE -->
+          <div class="form-group d-inline-block ml-4 mt-2">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" [(ngModel)]="action.name" [disabled]="mode == 'view'">
+          </div>
+
+          <!-- TIPO -->
+          <div class="form-group d-inline-block ml-4">
+            <label for="type">Tipo</label>
+            <select class="form-control" name="type" id="type" [disabled]="mode == 'view'" [(ngModel)]="action.type_id">
+              <option [value]="undefined">--Seleccione un tipo--</option>
+              <option *ngFor="let type of type_options['types']" [value]="type.id">{{type.name}}</option>
+            </select>
+          </div>
+
+          <!-- PROXIMA FECHA -->
+          <div class="form-group d-inline-block ml-4 mt-2">
+            <label for="nextDate">Próxima Fecha</label>
+            <input type="datetime" class="form-control" name="nextDate" id="nextDate" [(ngModel)]="action.nextDate" [disabled]="mode == 'view'">
+          </div>
+
+          <br>
+
+          <!-- OBSERVACIONES -->
+          <div class="form-group w-40 d-inline-block ml-4 mt-2">
+            <label for="observation">Observación</label>
+            <textarea class="form-control" id="observation" name="observation" placeholder="Observación" [(ngModel)]="action.observations" [disabled]="mode == 'view'"></textarea>
+          </div>
+
+          <!-- DESCRIPCION -->
+          <div class="form-group w-40 d-inline-block ml-4 mt-2">
+            <label for="description">Descripción</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Descripción" [(ngModel)]="action.description" [disabled]="mode == 'view'"></textarea>
+          </div>
+
+          <!-- ASUNTO -->
+          <div class="form-group w-40 d-inline-block ml-4 mt-2">
+            <label for="issue">Asunto</label>
+            <textarea class="form-control" id="issue" name="issue" placeholder="Asunto" [(ngModel)]="action.issue" [disabled]="mode == 'view'"></textarea>
+          </div>
+
+          <!-- RESULTADO -->
+          <div class="form-group w-40 d-inline-block ml-4 mt-2">
+            <label for="result">Resultado</label>
+            <textarea class="form-control" id="result" name="result" placeholder="Resultado" [(ngModel)]="action.result" [disabled]="mode == 'view'"></textarea>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!--BOTONES-->
+        <div class="form-group d-inline-block mt-2" *ngIf="mode == 'create'">
+          <button type="submit" class="btn btn-primary" id="buttonAddAction" (click)="storeAction(); modalClose()">Añadir <i class="fas fa-plus"></i></button>
+        </div>
+        <div class="form-group d-inline-block ml-4 mt-2" *ngIf="mode == 'edit'">
+          <button type="submit" class="btn btn-warning text-white" id="buttonEditAction" (click)="updateAction(); modalClose()">Editar <i class="fas fa-pencil-alt"></i></button>
+        </div>
+        <div class="form-group d-inline-block ml-4 mt-2 mr-3" *ngIf="mode == 'view'">
+          <button type="submit" class="btn btn-danger" id="buttonDeleteAction" (click)="showDeleteActionModal(action.id)">Borrar <i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="ModalDeleteAction" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border3 border-danger rounded bg-light">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="ModalLabelDelete">Borrar Acción</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4>¿Estás seguro que deseas eliminar esta acción?</h4>
+      </div>
+      <div class="modal-footer">
+        <!--BOTONES-->
+        <div class="form-group d-inline-block mt-2">
+          <button type="submit" class="btn btn-danger" id="buttonCancel" (click)="modalDeleteClose()">Cancelar</button>
+        </div>
+        <div class="form-group d-inline-block ml-4 mt-2 mr-3">
+          <button type="submit" class="btn btn-primary" id="buttonDelete" (click)="modalConfirmDelete()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

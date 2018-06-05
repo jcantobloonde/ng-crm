@@ -1,0 +1,61 @@
+<!-- Modal Company -->
+<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="ModalLabel2" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border3 border-warning rounded bg-light">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title text-white" id="ModalLabel2">Empresa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <!-- NOMBRE -->
+          <div class="form-group d-inline-block ml-4 mt-2">
+            <label for="nameCompany">Nombre Empresa</label>
+            <input type="text" class="form-control" name="nameCompany" id="nameCompany" placeholder="Nombre" [(ngModel)]="company.name" [disabled]="mode == 'view'">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!--BOTONES-->
+        <div class="form-group d-inline-block  mt-2" *ngIf="mode == 'create'">
+          <button type="submit" class="btn btn-primary" id="buttonAddCompany" (click)="storeCompany();modalClose()">Añadir <i class="fas fa-plus"></i></button>
+        </div>
+        <div class="form-group d-inline-block ml-4 mt-2" *ngIf="mode == 'edit'">
+          <button type="submit" class="btn btn-warning text-white" id="buttonEditCompany" (click)="updateCompany();modalClose()">Editar <i class="fas fa-pencil-alt"></i></button>
+        </div>
+        <div class="form-group d-inline-block ml-4 mt-2 mr-3" *ngIf="mode == 'view'">
+          <button type="submit" class="btn btn-danger" id="buttonDeleteCompany" (click)="showDeleteCompanyModal()">Borrar <i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="ModalDeleteCompany" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border3 border-danger rounded bg-light">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="ModalLabelDelete">Borrar Empresa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4>¿Estás seguro que deseas eliminar esta empresa?</h4>
+      </div>
+      <div class="modal-footer">
+        <!--BOTONES-->
+        <div class="form-group d-inline-block mt-2">
+          <button type="submit" class="btn btn-danger" id="buttonCancel" (click)="modalDeleteClose()">Cancelar</button>
+        </div>
+        <div class="form-group d-inline-block ml-4 mt-2 mr-3">
+          <button type="submit" class="btn btn-primary" id="buttonDelete" (click)="modalConfirmDelete()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

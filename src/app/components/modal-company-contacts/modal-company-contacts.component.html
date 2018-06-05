@@ -1,0 +1,73 @@
+<!-- Modal -->
+<div class="modal fade" id="ContactModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border3 border-primary rounded bg-light">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-white" id="ModalLabel">Contacto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <!-- NOMBRE -->
+          <div class="form-group d-inline-block ml-4 mt-2">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" name="name" id="name" [(ngModel)]="contact.name"  placeholder="Nombre">
+          </div>
+
+          <!-- APELLIDOS -->
+          <div class="form-group d-inline-block ml-4 mt-2">
+            <label for="surname">Apellidos</label>
+            <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="contact.surname" placeholder="Apellido/s">
+          </div>
+
+          <!-- EMAIL -->
+          <div class="form-group d-inline-block ml-4 mt-2">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="contact.email" placeholder="example@email.email">
+          </div>
+
+          <!-- EMPRESA -->
+          <div class="form-group d-inline-block ml-4">
+            <label for="company">Empresa</label>
+            <select class="form-control" name="company" id="company" disabled [(ngModel)]="contact.company_id">
+              <option [value]="undefined">--Seleccione una empresa--</option>
+              <option *ngFor="let company of company_options['companies']" [value]="company.id" >{{company.name}}</option>
+
+            </select>
+          </div>
+
+          <!-- ROL-->
+          <div class="form-group d-inline-block ml-4">
+            <label for="role">Rol</label>
+            <input type="text" class="form-control" id="role" name="role" [(ngModel)]="contact.role" placeholder="Rol">
+          </div>
+
+          <!-- CONTACTO PRINCIPAL-->
+          <div class="form-group d-inline-block ml-4" >
+            <label class="mr-3">Contacto Principal:</label>
+            <div class="custom-control custom-radio d-inline-block">
+              <input type="radio" id="customRadio1" name="customRadio" [value]="1" [(ngModel)]="contact.main_contact" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio1">Sí</label>
+            </div>
+            <div class="custom-control custom-radio d-inline-block ml-3 mr-5">
+              <input type="radio" id="customRadio2" name="customRadio" [value]="0" [(ngModel)]="contact.main_contact" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio2">No</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!--BOTONES-->
+        <div class="form-group d-inline-block  mt-2" *ngIf="mode == 'create'">
+          <button type="submit" class="btn btn-primary" id="buttonAddContact" (click)="storeContact(); modalClose()">Añadir <i class="fas fa-plus"></i></button>
+        </div>
+        <div class="form-group d-inline-block ml-4 mt-2" *ngIf="mode == 'edit'">
+          <button type="submit" class="btn btn-warning text-white" id="buttonEditContact" (click)="updateContact(); modalClose()">Editar <i class="fas fa-pencil-alt"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

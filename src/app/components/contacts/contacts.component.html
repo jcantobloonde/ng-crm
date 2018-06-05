@@ -1,0 +1,102 @@
+<div class="border3 border-primary rounded d-inline-block bg-light">
+
+  <!-- TÍTULO -->
+  <h4 class="bg-primary text-center text-white mb-0">
+    Info Contacto
+    <i class="fas fa-plus-circle float-right mr-2" (click)="changeMode('create'); resetFormContact('create')"></i>
+    <i class="fas fa-pencil-alt float-right mr-1" (click)="changeMode('edit'); getContactById(contact_id)"></i>
+    <i class="far fa-eye float-right mr-1" (click)="changeMode('view'); getContactById(contact_id)"></i>
+  </h4>
+
+  <form>
+
+    <!-- NOMBRE -->
+    <div class="form-group d-inline-block ml-4 mt-2">
+      <label for="name">Nombre</label>
+      <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" [(ngModel)]="contact.name" [disabled]="mode == 'view'">
+    </div>
+
+    <!-- APELLIDOS -->
+    <div class="form-group d-inline-block ml-4 mt-2">
+      <label for="surname">Apellidos</label>
+      <input type="text" name="surname" class="form-control" id="surname" placeholder="Apellido/s" [(ngModel)]="contact.surname" [disabled]="mode == 'view'">
+    </div>
+
+    <!-- EMAIL -->
+    <div class="form-group d-inline-block ml-4 mt-2">
+      <label for="email">Email</label>
+      <input type="email" name="email" class="form-control" id="email" placeholder="example@email.email" [(ngModel)]="contact.email" [disabled]="mode == 'view'">
+    </div>
+
+    <!-- EMPRESA -->
+    <div class="form-group d-inline-block ml-4">
+      <label for="company">Empresa</label>
+      <select class="form-control" name="company" id="company" [disabled]="mode != 'create'" [(ngModel)]="contact.company_id">
+        <option [value]="undefined">--Seleccione una empresa--</option>
+        <option *ngFor="let company of company_options['companies']" [value]="company.id" >{{company.name}}</option>
+
+      </select>
+    </div>
+
+    <!-- ROL-->
+    <div class="form-group d-inline-block ml-4">
+      <label for="role">Rol</label>
+      <input type="text" name="role" class="form-control" id="role" placeholder="Rol" [(ngModel)]="contact.role" [disabled]="mode == 'view'">
+    </div>
+
+    <!-- CONTACTO PRINCIPAL-->
+    <div class="form-group d-inline-block ml-4">
+      <label class="mr-3">Contacto Principal:</label>
+      <div class="custom-control custom-radio d-inline-block">
+        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" [value]="1" [(ngModel)]="contact.main_contact" [disabled]="mode == 'view'">
+        <label class="custom-control-label" for="customRadio1">Sí</label>
+      </div>
+      <div class="custom-control custom-radio d-inline-block ml-3 mr-5">
+        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" [value]="0" [(ngModel)]="contact.main_contact" [disabled]="mode == 'view'">
+        <label class="custom-control-label" for="customRadio2">No</label>
+      </div>
+    </div>
+
+    <!--BOTONES-->
+    <div class="float-right">
+      <div class="form-group d-inline-block mt-2 mr-5" *ngIf="mode == 'create'">
+        <button type="submit" class="btn btn-primary" id="buttonAddContact" (click)="storeContact()">Añadir <i class="fas fa-plus"></i></button>
+      </div>
+      <div class="form-group d-inline-block ml-4 mt-2 mr-5" *ngIf="mode == 'edit'">
+        <button type="submit" class="btn btn-warning text-white" id="buttonEditContact" (click)="updateContact()">Editar <i class="fas fa-pencil-alt"></i></button>
+      </div>
+      <div class="form-group d-inline-block ml-4 mt-2 mr-5" *ngIf="mode == 'view'" (click)="showModal()">
+        <button type="submit" class="btn btn-danger" id="buttonDeleteContact">Borrar <i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modal delete -->
+  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content border3 border-danger rounded bg-light">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title text-white" id="ModalLabel">Acción</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h4>¿Estás seguro que deseas eliminar este contacto?</h4>
+        </div>
+        <div class="modal-footer">
+          <!--BOTONES-->
+          <div class="form-group d-inline-block mt-2">
+            <button type="submit" class="btn btn-danger" id="buttonDeleteAction" (click)="modalClose()">Cancelar</button>
+          </div>
+          <div class="form-group d-inline-block ml-4 mt-2 mr-3">
+            <button type="submit" class="btn btn-primary" id="buttonAddAction" (click)="modalConfirmDelete()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

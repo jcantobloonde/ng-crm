@@ -1,0 +1,71 @@
+<div class="alert alert-success text-center" *ngIf="showCreateContactAlert == 'storeContact'">
+  ¡¡Contacto creado correctamente!!
+</div>
+<div class="alert alert-success text-center" *ngIf="showCreateContactAlert == 'updateContact'">
+  ¡¡Contacto actualizado correctamente!!
+</div>
+<div class="alert alert-danger text-center" *ngIf="showCreateContactAlert == 'error'">
+  ¡Ha ocurrido un error, inténtelo de nuevo!
+</div>
+
+<div class="border3 border-success rounded d-inline-block bg-light mt-5 w-100" *ngIf="company_id">
+
+  <!-- TÍTULO -->
+  <h4 class="bg-success text-center text-white mb-0">Contactos de la Empresa<i class="fas fa-plus-circle float-right mr-2" (click)="showCreateModal('create',company_id)"></i></h4>
+  <table class="table w-100">
+    <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido/s</th>
+      <th scope="col">Email</th>
+      <th scope="col">Rol</th>
+      <th scope="col">Contacto Principal</th>
+      <th scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let contact of contact_options['contacts']">
+    <tr>
+      <td>{{contact.name}}</td>
+      <td>{{contact.surname}}</td>
+      <td>{{contact.email}}</td>
+      <td>{{contact.role}}</td>
+      <td>{{contact.main_contact}}</td>
+      <td>
+        <i class="fas fa-pencil-alt text-warning ml-3" (click)="getContactById(contact.id, 'edit')"></i>
+        <i class="fas fa-trash text-danger ml-1" (click)="showDeleteModal(contact.id)"></i>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <app-modal-company-contacts (success)="changeAlert($event)"></app-modal-company-contacts>
+</div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="modalDeleteContact" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border3 border-danger rounded bg-light">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="ModalLabel">Acción</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4>¿Estás seguro que deseas eliminar este contacto?</h4>
+      </div>
+      <div class="modal-footer">
+        <!--BOTONES-->
+        <div class="form-group d-inline-block mt-2">
+          <button type="submit" class="btn btn-danger" id="buttonDeleteAction" (click)="modalClose()">Cancelar</button>
+        </div>
+        <div class="form-group d-inline-block ml-4 mt-2 mr-3">
+          <button type="submit" class="btn btn-primary" id="buttonAddAction" (click)="modalConfirmDelete()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

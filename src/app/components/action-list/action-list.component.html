@@ -1,0 +1,48 @@
+<div class="alert alert-success text-center mt-5" *ngIf="showCreateContactAlert == 'storeAction'">
+  ¡¡Acción creada correctamente!!
+</div>
+<div class="alert alert-success text-center mt-5" *ngIf="showCreateContactAlert == 'updateAction'">
+  ¡¡Acción editada correctamente!!
+</div>
+<div class="alert alert-success text-center mt-5" *ngIf="showCreateContactAlert == 'deleteAction'">
+  ¡¡Acción eliminada correctamente!!
+</div>
+<div class="alert alert-danger text-center mt-5" *ngIf="showCreateContactAlert == 'error'">
+  ¡Ha ocurrido un error, inténtelo de nuevo!
+</div>
+
+<div class="border3 border-success rounded d-inline-block bg-light mt-5 mb-5 w-100" *ngIf="thread_id">
+
+  <!-- TÍTULO -->
+  <h4 class="bg-success text-center text-white mb-0">Acciones<a class="fas fa-plus-circle float-right mr-2" (click)="addAction('create')"></a></h4>
+  <table class="table w-100">
+    <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Próxima Fecha</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Resultado</th>
+      <th scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let action of action_options['actions']">
+    <tr>
+      <td>{{action.name}}</td>
+      <td>{{action.nextDate}}</td>
+      <td>{{action.description}}</td>
+      <td>{{action.result}}</td>
+
+      <!-- ICONOS -->
+      <td>
+        <i class="far fa-eye text-primary ml-1" (click)="actionById(action.id, 'view')"></i>
+        <i class="fas fa-pencil-alt text-warning ml-2" (click)="actionById(action.id, 'edit')"></i>
+        <i class="fas fa-trash text-danger ml-2" (click)="deleteAction(action.id)"></i>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <app-modal-action-list (success)="changeAlert($event)" [inputThreadId]="thread_id"></app-modal-action-list>
+</div>
+
+
+

@@ -2,6 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
+## Installation
+
+
+1. Instalar nodejs --> https://nodejs.org/es/              // 1. Install nodejs
+2. Instalar Angular --> npm install -g @angular/cli@latest // 2. Instal Angular
+3. git clone rutaDelGit.com                                // 3. git clone routeGit.com  
+4. npm install                                             // 4. npm install
+5. npm start (para inicializar el servidor)                // 5. npm start (run server on localhost:4200)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
